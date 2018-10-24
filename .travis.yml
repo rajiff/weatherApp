@@ -11,4 +11,3 @@ deploy:
   api_key: 452d90d0-cd5c-4d43-818a-ab045e327d60
   app: basav-nodejs-weatherapp
   on: master
-  run: "npm start"
