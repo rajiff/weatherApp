@@ -12,9 +12,10 @@ describe('API Test cases', function() {
       .end((err, response) => {
         expect(err).to.equal((undefined || null));
         expect(response.body).to.a(typeof {});
-        expect(response.body.message).to.not.equal((undefined || null));
-        expect(response.body.message).to.a(typeof "");
-        expect(response.body.message).to.have.lengthOf.above(1);
+        expect(response.body.result).to.not.equal((undefined || null));
+        expect(response.body.result.message).to.not.equal((undefined || null));
+        expect(response.body.result.message).to.a(typeof "");
+        expect(response.body.result.message).to.have.lengthOf.above(1);
         done(null);
       });
   });
