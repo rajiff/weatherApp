@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const compression = require('compression');
 const express = require('express');
-const config = require('./config');
 const modulesV1 = require('./modules/v1');
 
 const app = express();
