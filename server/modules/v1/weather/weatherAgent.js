@@ -35,7 +35,7 @@ function getWeather(city, date) {
             forecast,
             conditions,
             currentConditions, */
-            message,
+            response_message: '',
           },
         };
 
