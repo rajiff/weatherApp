@@ -1,8 +1,7 @@
-const { expect } = require('chai');
+// const { expect } = require('chai');
 
-describe('API Test cases', function() {
-
-  it('Unit testing weather agent', function(done) {
+describe('API Test cases', () => {
+  it('Unit testing weather agent', (done) => {
     done();
   });
-})
+});
