@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "./node_modules/.bin/mocha ./**/*spec.js ./modules/**/*spec.js",
-    "lint": "./node_modules/.bin/eslint --ignore-path .eslintignore ./modules/**/*.js ./*.js"
+    "lint": "./node_modules/.bin/eslint --ignore-path .eslintignore ."
   },
   "keywords": [],
   "author": "",

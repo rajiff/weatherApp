@@ -46,7 +46,7 @@ function getWeather(city, date) {
 
       res.on('error', (error) => {
         logger.error(`Error calling the weather API: ${error}`);
-        reject('Something went wrong in checking the weather..!');
+        reject(new Error('Something went wrong in checking the weather..!'));
       });
     });
   });
