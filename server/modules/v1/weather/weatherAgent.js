@@ -38,10 +38,10 @@ function getWeather(city, date) {
           query: { city, date },
           result: {
             message,
-            location,
+            /*location,
             forecast,
             conditions,
-            currentConditions,
+            currentConditions,*/
           },
         };
 
