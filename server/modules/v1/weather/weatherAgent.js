@@ -17,24 +17,30 @@ function getWeather(city, date) {
       res.on('end', () => {
         // After all the data has been received parse the JSON for desired data
         const response = JSON.parse(body);
-        const forecast = (response && response.data && response.data.weather && response.data.weather[0]);
-        const location = (response && response.data && response.data.request && response.data.request[0]);
-        const conditions = (response && response.data && response.data.current_condition && response.data.current_condition[0]);
-        const currentConditions = (conditions && conditions.weatherDesc && conditions.weatherDesc[0] && conditions.weatherDesc[0].value);
+        const forecast = (response
+          && response.data && response.data.weather && response.data.weather[0]);
+        const location = (response
+          && response.data && response.data.request && response.data.request[0]);
+        const conditions = (response
+          && response.data
+          && response.data.current_condition && response.data.current_condition[0]);
+        const currentConditions = (conditions
+          && conditions.weatherDesc && conditions.weatherDesc[0]
+          && conditions.weatherDesc[0].value);
 
         // Create response
-        const message = `Current conditions in the ${((location && location.type) || 'not found')} `;
-        (currentConditions) ? message += `${location.query} are ${currentConditions} with a projected high of`: '';
-        (forecast && forecast.maxtempC) ? message += `${forecast.maxtempC}°C or ${forecast.maxtempF}°F and a low of `: '';
-        (forecast && forecast.mintempC) ? message += `${forecast.mintempC}°C or ${forecast.mintempF}°F on ${forecast.date}`: '';
+        let message = `Current conditions in the ${((location && location.type) || 'not found')} `;
+        if (currentConditions) message += `${location.query} are ${currentConditions} with a projected high of `;
+        if (forecast && forecast.maxtempC) message += `${forecast.maxtempC}°C or ${forecast.maxtempF}°F and a low of `;
+        if (forecast && forecast.mintempC) message += `${forecast.mintempC}°C or ${forecast.mintempF}°F on ${forecast.date} `;
 
         const output = {
           query: { city, date },
           result: {
-            /*location,
+            /* location,
             forecast,
             conditions,
-            currentConditions,*/
+            currentConditions, */
             message,
           },
         };
