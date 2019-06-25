@@ -37,11 +37,11 @@ function getWeather(city, date) {
         const output = {
           query: { city, date },
           result: {
-            /* location,
+            message,
+            location,
             forecast,
             conditions,
-            currentConditions, */
-            message,
+            currentConditions,
           },
         };
 
