@@ -5,9 +5,10 @@ const logger = require('../../../applogger');
 function getWeather(city, date) {
   return new Promise((resolve, reject) => {
     // Create the path for the HTTP request to get the weather
+    // https://api.worldweatheronline.com/premium/v1/weather.ashx
     const path = `${'/premium/v1/weather.ashx?format=json&num_of_days=1'
       + '&q='}${encodeURIComponent((city || 'Bangalore'))}&key=${config.WWO_API_KEY}&date=${date || Date.now()}`;
-    logger.debug(`About make weather API Request: ${path}`);
+    logger.debug(`About to make weather API Request: ${path}`);
 
     // Make the HTTP request to get the weather
     http.get({ host: config.WEATHER_API_BASE_URL, path }, (res) => {
@@ -16,25 +17,24 @@ function getWeather(city, date) {
       res.on('end', () => {
         // After all the data has been received parse the JSON for desired data
         const response = JSON.parse(body);
-        const forecast = response.data.weather[0];
-        const location = response.data.request[0];
-        const conditions = response.data.current_condition[0];
-        const currentConditions = conditions.weatherDesc[0].value;
+        const forecast = (response && response.data && response.data.weather && response.data.weather[0]);
+        const location = (response && response.data && response.data.request && response.data.request[0]);
+        const conditions = (response && response.data && response.data.current_condition && response.data.current_condition[0]);
+        const currentConditions = (conditions && conditions.weatherDesc && conditions.weatherDesc[0] && conditions.weatherDesc[0].value);
 
         // Create response
-        const message = `Current conditions in the ${location.type} 
-        ${location.query} are ${currentConditions} with a projected high of
-        ${forecast.maxtempC}°C or ${forecast.maxtempF}°F and a low of 
-        ${forecast.mintempC}°C or ${forecast.mintempF}°F on 
-        ${forecast.date}.`;
+        const message = `Current conditions in the ${((location && location.type) || 'not found')} `;
+        (currentConditions) ? message += `${location.query} are ${currentConditions} with a projected high of`: '';
+        (forecast && forecast.maxtempC) ? message += `${forecast.maxtempC}°C or ${forecast.maxtempF}°F and a low of `: '';
+        (forecast && forecast.mintempC) ? message += `${forecast.mintempC}°C or ${forecast.mintempF}°F on ${forecast.date}`: '';
 
         const output = {
           query: { city, date },
           result: {
-            location,
+            /*location,
             forecast,
             conditions,
-            currentConditions,
+            currentConditions,*/
             message,
           },
         };
