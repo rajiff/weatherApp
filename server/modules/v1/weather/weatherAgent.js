@@ -41,7 +41,7 @@ function getWeather(city, date) {
             location,
             forecast,
             conditions,
-            currentConditions
+            currentConditions,
           },
         };
 
